@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="installation" class="row featurette">
+    <div class="col-md-12">
+        <div class="col-md-8">
+        </div>
+        <div class="col-md-4" id="biaodan">
+            <div class="man-top">
+                <form class="form-signin" role="form" id="a1">
+                    <h1>Login/登陆</h1>
+                    <input type="text" class="form-control" name="user" placeholder="用户名" required autofocus />
+                    <input type="password" class="form-control"name="password" placeholder="密码" required />
+                    <button class="btn btn-lg btn-warning btn-block" id="submit" type="submit">登录</button>
+                    <label class="checkbox"><input type="checkbox" value="remember-me"> 记住我</label>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+
+<script src="~/js/md5.js"></script>
+<script>
+    jQuery(document).ready(function ($) {
+
+        $("#submit").click(function (e) {
+            var name = document.getElementsByTagName('user');
+            var psd = document.getElementsByTagName('password');
+            var psd = hex_md5(psd);
+            var obj = { "user": name, "psw": psd };
+            $.ajax({
+                type: "post",                  //提交方式
+                url: "/Home/Login2",  //提交路径
+                data: obj,//参数
+                success: function (result, status)//成功函数
+                {
+                    alert("数据库保存成功！");
+                },
+                error: function () {
+                    alert("添加失败，程序异常！");
+                    return;
+                }
+            });
+        })
+
+    });
+            
+
+
+</script>
+

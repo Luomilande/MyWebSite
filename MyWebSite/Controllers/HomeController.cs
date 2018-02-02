@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyWebSite.Models;
 
@@ -10,14 +11,24 @@ namespace MyWebSite.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly Data.ApplicationContext _context;
+
+        public HomeController(Data.ApplicationContext context)
+        {
+            _context = context;
+        }
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult Login()
         {
-            ViewData["Message"] = "Your application description page.";
+            return View(_context.User.ToList());
+        }
+
+        public  IActionResult Login2(User user)
+        {
 
             return View();
         }
