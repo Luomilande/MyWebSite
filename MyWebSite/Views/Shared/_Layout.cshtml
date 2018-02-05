@@ -24,10 +24,10 @@
         <div class="carousel-inner" style="">
             <div class="item active">
                 <div class="container">
-                    <div class="carousel-caption">
-                        <h1>个人网</h1>
+                    <div class="carousel-caption" id="info">
+                        @*<h1 >个人网</h1>
                         <h3>做个简简单单的个人网</h3>
-                        <p></p>
+                        <p></p>*@
                     </div>
                 </div>
             </div>
@@ -49,8 +49,8 @@
                             <span class="icon-bar"></span>
                         </button>
                         <!-- <a class="navbar-brand" href="#">
-                            <img alt="Brand" src="images/logo4.png">
-                        </a> -->
+                        <img alt="Brand" src="images/logo4.png">
+                    </a> -->
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -85,13 +85,16 @@
                             </div>
                             <button type="submit" class="btn btn-default">搜索</button>
                         </form>
+                        @if (true)
+                    {
+                        <button type="button" class="btn btn-danger" id="Login" style="margin:8px;float:right;">退出</button>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-success" id="Login" style="margin:8px;float:right;">登陆</button>
+            }
 
-                        <ul class="nav navbar-nav navbar-right" style="margin-top:8px;margin-right:5px;">
-                            <button type="button" class="btn btn-primary" onclick='toggleFullScreen();'>全屏</button>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right" style="margin-top:8px;margin-right:5px;">
-                            <button type="button" class="btn btn-success">登陆</button>
-                        </ul>
+                        <button type="button" class="btn btn-primary" onclick='toggleFullScreen();' style="margin:8px;float:right;">全屏</button>
 
                     </div>
                     <!-- /.navbar-collapse -->
@@ -118,8 +121,8 @@
                     </div>
                     <div class="col-12 col-lg-12">
                         <div class="col-lg-offset-2 col-lg-2 text-center">
-                            <a href="http://github.com/LiranCohen/stickUp"><img src="~/images/icons/IE.png"></a>
-                            <h3>IE</h3>
+                            <a href="http://github.com/LiranCohen/stickUp"><img src="~/images/icons/Windows.png"></a>
+                            <h3>Windows</h3>
                         </div>
                         <div class="col-lg-2 text-center">
                             <a href="http://www.twitter.com/itsLiran"><img src="~/images/icons/HTML5.png"></a>
@@ -149,14 +152,41 @@
         </div>
         <!-- END CONTENT -->
         <p id="back-to-top"><a href="#top"><span></span>返回顶部</a></p>
-        <div style="position: fixed;bottom:-8px;"><object type="application/x-shockwave-flash" style="outline:none;" data="https://cdn.abowman.com/widgets/hamster/hamster.swf?" width="200" height="160"><param name="movie" value="https://cdn.abowman.com/widgets/hamster/hamster.swf?"><param name="AllowScriptAccess" value="always"><param name="wmode" value="opaque"></object></div>
+        <div style="position: fixed;bottom:-8px;z-index:11;"><object type="application/x-shockwave-flash" style="outline:none;" data="https://cdn.abowman.com/widgets/hamster/hamster.swf?" width="200" height="160"><param name="movie" value="https://cdn.abowman.com/widgets/hamster/hamster.swf?"><param name="AllowScriptAccess" value="always"><param name="wmode" value="opaque"></object></div>
         <!-- Bootstrap & Plugins core JavaScript
-        ================================================== -->
+    ================================================== -->
         <script src="~/js/jquery.js"></script>
         <script src="~/js/bootstrap.min.js"></script>
         <script src="~/js/cation.js"></script>
         <script src="~/js/Top.js"></script>
         <script src="~/js/Mouse.js"></script>
+        <script>
+
+            document.getElementById("Login").onclick = function () { location.href = "/Home/Login"; };
+
+        </script>
+        <script language="javaScript">
+            var d = new Date();
+            var h = d.getHours();
+            var s = '';
+            if (h >= 1 && h < 8) {
+                s = '早上好';
+            } else if (h>=8 && h < 11) {
+                s = '上午好';
+            } else if (h >= 11 && h < 13) {
+                s = '中午好';
+            } else if (h >= 13 && h < 17) {
+                s = '下午好';
+            } else if (h >= 17 && h < 24) {
+                s = '晚上好';
+            }
+            var a =
+                "<h1 style='font-size:60px'>Welcome.</h1>" +
+                "<h3>" + s + ",Admin</h3>" +
+                "<p></p>";
+            $("#info").append(a);
+
+        </script>
         <!-- ######################################## -->
     </div>
     @RenderSection("Scripts", required: false)

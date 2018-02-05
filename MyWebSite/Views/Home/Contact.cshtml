@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Contact";
 }
+<link rel="stylesheet" href="~/css/dropzone.css" />
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
@@ -10,8 +11,42 @@
     <abbr title="Phone">P:</abbr>
     425.555.0100
 </address>
+<div class="dropzone" id="myDropzone">
+    <div class="am-text-success dz-message">
+        将文件拖拽到此处<br>或点此打开文件管理器选择文件
+    </div>
+</div>
+@*<form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
+    <div class="form-group">
+        <div class="col-md-10">
+            <p>Upload one or more files using this form:</p>
+            <input type="file" name="files" multiple />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Upload" />
+            @ViewBag.Message
+        </div>
+    </div>
+</form>*@
+<script src="~/js/dropzone.js"></script>
+<script type="text/javascript">
+    Dropzone.autoDiscover = false;
+    var myDropzone = new Dropzone("#myDropzone", {
+        url: "/Home/Post",
+        addRemoveLinks: true,
+        method: 'post',
+        filesizeBase: 1024,
+        sending: function (file, xhr, formData) {
+            formData.append("filesize", file.size);
+        },
+        success: function (file, response, e) {
+            var res = JSON.parse(response);
+            if (res.error) {
+                $(file.previewTemplate).children('.dz-error-mark').css('opacity', '1')
+            }
+        }
+    });
+</script>
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>

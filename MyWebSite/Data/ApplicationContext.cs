@@ -13,7 +13,7 @@ namespace MyWebSite.Data
         {
 
         }
-        public DbSet<User> User { get; set; }
+        public DbSet<UserName> UserName { get; set; }
 
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder) //指定生成数据库中表的名字

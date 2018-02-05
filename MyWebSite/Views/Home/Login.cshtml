@@ -9,7 +9,7 @@
         </div>
         <div class="col-md-4" id="biaodan">
             <div class="man-top">
-                <form class="form-signin" role="form" id="a1">
+                <form class="form-signin" role="form" id="a1" method="post" asp-action="Login2">
                     <h1>Login/登陆</h1>
                     <input type="text" class="form-control" name="user" placeholder="用户名" required autofocus />
                     <input type="password" class="form-control"name="password" placeholder="密码" required />
@@ -23,33 +23,26 @@
     </div>
 </div>
 
-<script src="~/js/md5.js"></script>
-<script>
-    jQuery(document).ready(function ($) {
 
-        $("#submit").click(function (e) {
+@*<script>
+    $(function () {
+        $('#submit').click(function () {
             var name = document.getElementsByTagName('user');
             var psd = document.getElementsByTagName('password');
-            var psd = hex_md5(psd);
-            var obj = { "user": name, "psw": psd };
+            psd = hex_md5(psd);
             $.ajax({
-                type: "post",                  //提交方式
-                url: "/Home/Login2",  //提交路径
-                data: obj,//参数
-                success: function (result, status)//成功函数
-                {
-                    alert("数据库保存成功！");
-                },
-                error: function () {
-                    alert("添加失败，程序异常！");
-                    return;
+                'type': 'post', 'url': '/home/login2',
+                //传递的数据也可以是序列化之后的json格式数据
+                //如，上面使用form表单提交数据就可以使用jquery中的serialize()方法将表单进行序列化之后在提交
+                //data:$('#form').serialize()
+                'data': { user: name, psd: psd },
+                error: function (message) {
+                    alert('error!');
                 }
             });
         })
-
-    });
-            
+    })   
 
 
-</script>
+</script>*@
 
